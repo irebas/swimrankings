@@ -167,4 +167,4 @@ def create_date(date_str):
 
     return new_date.date()
 
-# create_date('24 May 2018')
+
