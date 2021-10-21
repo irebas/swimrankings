@@ -1,0 +1,12 @@
+1. Compare results of one swimmer
+    a) select swimmer procedure
+    b) select numbers of distances to compare (max 3)
+    c) select distances
+    d) gather data
+    e) draw graphs
+2. Compare results of 2 swimmers
+    a) select swimmer 1 procedure
+    b) select swimmer 2 procedure
+    c) select distance
+    d) gather data
+    e) draw graphs
