@@ -1,5 +1,7 @@
 from functions import *
 
+# WORKING
+
 swimmers_list = []
 input_text = ''
 while True:

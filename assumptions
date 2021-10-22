@@ -1,12 +1,19 @@
+Functionalities:
 1. Compare results of one swimmer
-    a) select swimmer procedure
-    b) select numbers of distances to compare (max 3)
-    c) select distances
-    d) gather data
-    e) draw graphs
+    1.1 get_page_source (get source of the page with results of searched swimmer)
+    1.2 get_swimmers_list (get list of all swimmers that meet search criteria)
+    1.3 get_specific swimmer (specific swimmer selection)
+    1.4 get_swimmer_distances (get list of distances of the swimmer)
+    1.5 get_distances_to_compare (get list of distances to compare)
+    1.6 get_results (get list of of results for selected distances)
+    1.7 draw graphs (draw graphs for selected distances)
 2. Compare results of 2 swimmers
-    a) select swimmer 1 procedure
-    b) select swimmer 2 procedure
-    c) select distance
-    d) gather data
-    e) draw graphs
+    2.1 store swimmer/link to his page/list of his distances in a tuple
+        2.1.1 get_page_source
+        2.1.2 get_swimmers_list
+        2.1.3 get_specific swimmer
+        2.1.4 get swimmer_distances
+    2.2 get_common_distances (get list of common distances for all swimmers)
+    2.3 get_distance_to_compare (select distance to compare)
+    2.4 get_results_2 (get results of particular distance of selected swimmers)
+    2.5 draw_graphs_2

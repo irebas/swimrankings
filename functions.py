@@ -26,7 +26,6 @@ def get_page_source(searched_swimmer):
     return swimmers_list_df
 
 
-
 def get_swimmers_list(page_source):
     df = pd.DataFrame(columns=['Swimmer_nb', 'Swimmer', 'Date of birth', 'Club', 'Href'])
     soup = BeautifulSoup(page_source, 'html.parser')
@@ -60,7 +59,7 @@ def get_specific_swimmer(swimmers_list_df):
         swimmer = 'NA'
         print('No results found')
 
-    swimmer_params = ((link_swimmer, swimmer))
+    swimmer_params = (link_swimmer, swimmer)
     return swimmer_params
 
 
@@ -89,7 +88,7 @@ def get_swimmer_distances(link):
     return df_join
 
 
-def get_distances(distances_str):
+def get_distances_to_compare(distances_str):
     df = pd.DataFrame(columns=['Code'])
     distances_tab = []
     distances = distances_str.split(',')
@@ -186,5 +185,3 @@ def create_date(date_str):
     new_date = datetime.datetime(year, month, day)
 
     return new_date.date()
-
-

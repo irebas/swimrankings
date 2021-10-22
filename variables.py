@@ -18,11 +18,8 @@ MAIN_URL = r'https://www.swimrankings.net/index.php?page=athleteSelect&nationId=
 CHROME_OPTIONS = Options()
 CHROME_OPTIONS.add_argument("--headless")
 DRIVER = webdriver.Chrome(service=SERVICE, options=CHROME_OPTIONS)
-
 # MAIN_URL = r'https://www.swimrankings.net/index.php?page=athleteSelect&nationId=0&selectPage=SEARCH'
 # DRIVER = webdriver.Chrome(r'C:\Users\igorr\PycharmProjects\swimrankings\chromedriver.exe')
-
-
 
 DISTANCE_LIST = {'Distance': ['50m Libre', '100m Libre', '200m Libre', '400m Libre',
                               '800m Libre', '1500m Libre', '50m Espalda', '100m Espalda',

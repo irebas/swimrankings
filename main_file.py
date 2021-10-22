@@ -11,8 +11,8 @@ link_distance_details = link_swimmer + '&styleId='
 print('\n\n')
 print(swimmer_distances.to_string(index=False))
 distances_str = input('Select distances to compare. Provide distance codes separated with comma: ')
-distances_tab = get_distances(distances_str)[0]
-df_labels = get_distances(distances_str)[1]
+distances_tab = get_distances_to_compare(distances_str)[0]
+df_labels = get_distances_to_compare(distances_str)[1]
 results = get_results(distances_tab, link_distance_details)
 draw_plots(results, df_labels, swimmer)
-#DRIVER.quit()
+# DRIVER.quit()
