@@ -110,6 +110,21 @@ def get_swimmer_distances(link_swimmer):
     return swimmer_distances_join
 
 
+def get_common_distances(swimmers_to_compare):
+    """
+    :param swimmers_to_compare: swimmers parameters (link to his website, name and list
+    of distances converted to set). We are interested only in list of distances
+    :return: list of common distances for selected swimmers
+    """
+    common_distances_codes = swimmers_to_compare[0][2]
+    for distances in swimmers_to_compare:
+        common_distances_codes = common_distances_codes.intersection(distances[2])
+    common_distances = pd.DataFrame(common_distances_codes, columns=['Code'])
+    common_distances = pd.merge(common_distances, DISTANCES_CODES, on='Code', how='inner')
+    common_distances.sort_values(by=['Order'], inplace=True)
+    return common_distances
+
+
 def get_distances_to_compare(distances_str):
     """
     :param distances_str: string of distances to be compared provided by user
@@ -129,14 +144,16 @@ def get_distances_to_compare(distances_str):
         elif distance_course == 'SC':
             table_nb = 1
         distances_params.append([distance_nb, table_nb])
-    distances_labels = pd.merge(distances_codes, DISTANCES_CODES, on='Code', how='inner')
+    distances_labels_merged = pd.merge(distances_codes, DISTANCES_CODES, on='Code', how='inner')
+    distances_labels = distances_labels_merged['Distance'].values
     return distances_params, distances_labels
 
 
-def get_results(distances_params, link_distance_details):
+def get_results(distances_params, link_distance_details, return_type):
     """
     :param distances_params: parameters of particular distance
     :param link_distance_details: link to the results of the particular distance for selected swimmer
+    :param return_type: type to be returned dataframe or list (depending on option)
     :return: table with dataframes containing all results for all distances
     """
     results_all = []
@@ -157,21 +174,25 @@ def get_results(distances_params, link_distance_details):
                 date = create_date(columns[2].text)
                 city = columns[3].text
                 year = datetime.datetime(int(columns[2].text[-4:]), 12, 31)
-                distance_results = distance_results.append({'Time': time, 'Points': points, 'Date': date, 'City': city, 'Year': year},
-                               ignore_index=True)
+                distance_results = distance_results.append({'Time': time, 'Points': points,
+                                                            'Date': date, 'City': city, 'Year': year},
+                                                           ignore_index=True)
         distance_results.sort_values(by='Date', inplace=True, ascending=True)
         print(distance_results)
         # df_agg = df.groupby('Year').max().reset_index() # Aggregating function
         results_all.append(distance_results)
-        distance_results = distance_results[0:0]
+        if return_type == 'one-dist':
+            return distance_results
+        else:
+            distance_results = distance_results[0:0]
     return results_all
 
 
-def draw_plots(results_all, distances_labels, swimmer):
+def draw_plots(results_all, labels, title):
     """
     :param results_all: table with dataframes containing all results for all distances
-    :param distances_labels: distances labels
-    :param swimmer: swimmer's name
+    :param labels: distances/swimmers labels
+    :param title: swimmer/distance as title
     :return: nothing, drawing chart
     """
     nb = -1
@@ -179,13 +200,13 @@ def draw_plots(results_all, distances_labels, swimmer):
         results['Points'] = pd.to_numeric(results['Points'])
         nb += 1
         color = COLORS[nb]
-        series_name = distances_labels.iloc[nb, 1]
-        plt.plot(results['Date'], results['Points'], color=color, marker='o', markersize=4, label=series_name)
+        series_name = labels[nb]
+        plt.plot(results['Date'], results['Points'], color=color, marker='o', markersize=3, label=series_name)
         for x, y in zip(results['Date'], results['Points']):
             label_point = "{:.0f}".format(y)
-            plt.annotate(label_point, (x, y), textcoords='offset points', xytext=(0, 10), ha='center', fontsize=5)
+            plt.annotate(label_point, (x, y), textcoords='offset points', xytext=(0, 10), ha='center', fontsize=7)
 
-    plt.title('Results in time: ' + swimmer, fontsize=14)
+    plt.title('Results in time: ' + title, fontsize=14)
     plt.xlabel('Date', fontsize=12)
     plt.ylabel('Points', fontsize=12)
     plt.grid(True)

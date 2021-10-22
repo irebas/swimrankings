@@ -43,6 +43,7 @@ DISTANCES_IDS_DATA = {'Distance': ['50m Libre', '100m Libre', '200m Libre', '400
                              19]}
 
 DISTANCES_CODES_DATA = {
+    'Order': list(range(1, 36)),
     'Code': ['1-SC', '1-LC', '2-SC', '2-LC', '3-SC', '3-LC', '5-SC', '5-LC', '6-SC', '6-LC', '7-SC', '7-LC',
              '9-SC', '9-LC', '10-SC', '10-LC', '11-SC', '11-LC', '12-SC', '12-LC', '13-SC', '13-LC', '14-SC', '14-LC',
              '15-SC', '15-LC', '16-SC', '16-LC', '17-SC', '17-LC', '20-SC', '18-SC', '18-LC', '19-SC', '19-LC'],
@@ -55,10 +56,9 @@ DISTANCES_CODES_DATA = {
                  '100m IM SC', '200m IM SC', '200m IM LC', '400m IM SC', '400m IM LC']}
 
 DISTANCES_IDS = pd.DataFrame(DISTANCES_IDS_DATA, columns=['Distance', 'ID'])
-DISTANCES_CODES = pd.DataFrame(DISTANCES_CODES_DATA, columns=['Code', 'Distance'])
+DISTANCES_CODES = pd.DataFrame(DISTANCES_CODES_DATA, columns=['Order', 'Code', 'Distance'])
 
 COLORS = ['blue', 'orange', 'green', 'red', 'purple', 'brown', 'pink', 'gray', 'olive', 'cyan']
-
 
 MONTHS_EN = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 MONTHS_PL = ['Sty', 'Lut', 'Mar', 'Kwi', 'Maj', 'Cze', 'Lip', 'Sie', 'Wrz', 'Paź', 'Lis', 'Gru']
