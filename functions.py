@@ -14,6 +14,8 @@ def get_page_source(searched_swimmer):
 
     lastname_search = DRIVER.find_element(By.NAME, 'athlete_lastname')
     firstname_search = DRIVER.find_element(By.NAME, 'athlete_firstname')
+    lastname_search.clear()
+    firstname_search.clear()
     lastname_search.send_keys(lastname)
     lastname_search.send_keys(Keys.RETURN)
     firstname_search.send_keys(firstname)
@@ -22,6 +24,7 @@ def get_page_source(searched_swimmer):
     page_source = DRIVER.page_source.encode('utf-8')
     swimmers_list_df = get_swimmers_list(page_source)
     return swimmers_list_df
+
 
 
 def get_swimmers_list(page_source):
@@ -42,6 +45,23 @@ def get_swimmers_list(page_source):
             df = df.append(data, ignore_index=True)
     # print(tabulate(df.to_string(index=False), headers='keys', tablefmt='psql'))
     return df
+
+
+def get_specific_swimmer(swimmers_list_df):
+    df_length = len(swimmers_list_df)
+    if df_length > 1:
+        swimmer_nb = input('\nThere are more results for this search. Select specific swimmer: ')
+        link_swimmer = swimmers_list_df.iloc[int(swimmer_nb) - 1, 4]
+        swimmer = swimmers_list_df.iloc[int(swimmer_nb) - 1, 1]
+    elif df_length == 1:
+        link_swimmer = swimmers_list_df.iloc[0, 4]
+        swimmer = swimmers_list_df.iloc[0, 1]
+    else:
+        swimmer = 'NA'
+        print('No results found')
+
+    swimmer_params = ((link_swimmer, swimmer))
+    return swimmer_params
 
 
 def get_swimmer_distances(link):
