@@ -178,7 +178,7 @@ def get_results(distances_params, link_distance_details, return_type):
                                                             'Date': date, 'City': city, 'Year': year},
                                                            ignore_index=True)
         distance_results.sort_values(by='Date', inplace=True, ascending=True)
-        print(distance_results)
+        # print(distance_results)
         # df_agg = df.groupby('Year').max().reset_index() # Aggregating function
         results_all.append(distance_results)
         if return_type == 'one-dist':
@@ -186,6 +186,20 @@ def get_results(distances_params, link_distance_details, return_type):
         else:
             distance_results = distance_results[0:0]
     return results_all
+
+
+def get_swimmers_results(swimmers_to_compare, distance_params):
+    results_all = []
+    swimmers_labels = []
+    for swimmer in swimmers_to_compare:
+        link_swimmer = swimmer[0]
+        swimmer_label = swimmer[1]
+        link_distance_details = link_swimmer + '&styleId='
+        results = get_results(distance_params, link_distance_details, 'one-dist')
+        results_all.append(results)
+        swimmers_labels.append(swimmer_label)
+
+    return results_all, swimmers_labels
 
 
 def draw_plots(results_all, labels, title):

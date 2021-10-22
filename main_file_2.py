@@ -20,15 +20,6 @@ print(common_distances.to_string(index=False))
 distance_str = input('Select distance to compare. Provide distance code: ')
 distance_params = get_distances_to_compare(distance_str)[0]
 distance_label = get_distances_to_compare(distance_str)[1][0]
-
-results_all = []
-swimmers_labels = []
-for swimmer in swimmers_to_compare:
-    link_swimmer = swimmer[0]
-    swimmer_label = swimmer[1]
-    link_distance_details = link_swimmer + '&styleId='
-    results = get_results(distance_params, link_distance_details, 'one-dist')
-    results_all.append(results)
-    swimmers_labels.append(swimmer_label)
-
+results_all = get_swimmers_results(swimmers_to_compare, distance_params)[0]
+swimmers_labels = get_swimmers_results(swimmers_to_compare, distance_params)[1]
 draw_plots(results_all, swimmers_labels, distance_label)
