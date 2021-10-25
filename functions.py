@@ -1,5 +1,22 @@
 from variables import *
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.by import By
+from bs4 import BeautifulSoup
+from time import sleep
+import datetime
+import matplotlib.pyplot as plt
+import pandas as pd
 
+SERVICE = Service(r'C:\Users\igorr\PycharmProjects\swimrankings\chromedriver.exe')
+MAIN_URL = r'https://www.swimrankings.net/index.php?page=athleteSelect&nationId=0&selectPage=SEARCH'
+CHROME_OPTIONS = Options()
+CHROME_OPTIONS.add_argument("--headless")
+DRIVER = webdriver.Chrome(service=SERVICE, options=CHROME_OPTIONS)
+# MAIN_URL = r'https://www.swimrankings.net/index.php?page=athleteSelect&nationId=0&selectPage=SEARCH'
+# DRIVER = webdriver.Chrome(r'C:\Users\igorr\PycharmProjects\swimrankings\chromedriver.exe')
 
 def get_page_source(searched_swimmer):
     """

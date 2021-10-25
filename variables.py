@@ -1,46 +1,21 @@
-from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.common.by import By
-# from selenium.webdriver.support.ui import WebDriverWait
-# from selenium.webdriver.support import expected_conditions as EC
-from bs4 import BeautifulSoup
-from time import sleep
-import datetime
-from tabulate import tabulate
-from requests import get
 import pandas as pd
-import matplotlib.pyplot as plt
-
-SERVICE = Service(r'C:\Users\igorr\PycharmProjects\swimrankings\chromedriver.exe')
-MAIN_URL = r'https://www.swimrankings.net/index.php?page=athleteSelect&nationId=0&selectPage=SEARCH'
-CHROME_OPTIONS = Options()
-CHROME_OPTIONS.add_argument("--headless")
-DRIVER = webdriver.Chrome(service=SERVICE, options=CHROME_OPTIONS)
-# MAIN_URL = r'https://www.swimrankings.net/index.php?page=athleteSelect&nationId=0&selectPage=SEARCH'
-# DRIVER = webdriver.Chrome(r'C:\Users\igorr\PycharmProjects\swimrankings\chromedriver.exe')
 
 DISTANCES_IDS_DATA = {'Distance': ['50m Libre', '100m Libre', '200m Libre', '400m Libre',
                                    '800m Libre', '1500m Libre', '50m Espalda', '100m Espalda',
                                    '200m Espalda', '50m Braza', '100m Braza', '200m Braza',
                                    '50m Mariposa', '100m Mariposa', '200m Mariposa', '100m Estilos',
-                                   '200m Estilos', '400m Estilos', '50m dowolny', '100m dowolny', '200m dowolny',
-                                   '400m dowolny',
-                                   '800m dowolny', '1500m dowolny', '50m grzbietowy', '100m grzbietowy',
-                                   '200m grzbietowy', '50m klasyczny', '100m klasyczny', '200m klasyczny',
-                                   '50m motylkowy', '100m motylkowy', '200m motylkowy', '100m zmienny',
-                                   '200m zmienny', '400m zmienny', '50m freestyle', '100m freestyle', '200m freestyle',
-                                   '400m freestyle',
-                                   '800m freestyle', '1500m freestyle', '50m backstroke', '100m backstroke',
-                                   '200m backstroke', '50m breaststroke', '100m breaststroke', '200m breaststroke',
-                                   '50m butterfly', '100m butterfly', '200m butterfly', '100m IM',
+                                   '200m Estilos', '400m Estilos', '50m Dowolny', '100m Dowolny', '200m Dowolny',
+                                   '400m Dowolny', '800m Dowolny', '1500m Dowolny', '50m Grzbietowy', '100m Grzbietowy',
+                                   '200m Grzbietowy', '50m Klasyczny', '100m Klasyczny', '200m Klasyczny',
+                                   '50m Motylkowy', '100m Motylkowy', '200m Motylkowy', '100m Zmienny',
+                                   '200m Zmienny', '400m Zmienny', '50m Freestyle', '100m Freestyle', '200m Freestyle',
+                                   '400m Freestyle', '800m Freestyle', '1500m Freestyle', '50m Backstroke',
+                                   '100m Backstroke', '200m Backstroke', '50m Breaststroke', '100m Breaststroke',
+                                   '200m Breaststroke', '50m Butterfly', '100m Butterfly', '200m Butterfly', '100m IM',
                                    '200m IM', '400m IM'],
                       'ID': [1, 2, 3, 5, 6, 7, 9, 10, 11, 12, 13, 14, 15, 16, 17, 20, 18, 19, 1, 2, 3, 5, 6, 7, 9, 10,
-                             11,
-                             12, 13, 14, 15, 16, 17, 20, 18, 19, 1, 2, 3, 5, 6, 7, 9, 10, 11, 12, 13, 14, 15, 16, 17,
-                             20, 18,
-                             19]}
+                             11, 12, 13, 14, 15, 16, 17, 20, 18, 19, 1, 2, 3, 5, 6, 7, 9, 10, 11, 12, 13, 14, 15, 16,
+                             17, 20, 18, 19]}
 
 DISTANCES_CODES_DATA = {
     'Order': list(range(1, 36)),
